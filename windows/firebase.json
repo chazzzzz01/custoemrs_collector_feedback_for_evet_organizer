@@ -1,0 +1,29 @@
+{
+    "project_info": {
+      "project_number": "642788872239",
+      "project_id": "customers-collector-feed-f260a",
+      "storage_bucket": "customers-collector-feed-f260a.firebasestorage.app"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:642788872239:android:6e57e9b969a20b74ccf6da",
+          "android_client_info": {
+            "package_name": "com.example.costumers"
+          }
+        },
+        "oauth_client": [],
+        "api_key": [
+          {
+            "current_key": "AIzaSyB0TH2pnjSE-f8NLqPsq3dQwkCF9RAkjog"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": []
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
