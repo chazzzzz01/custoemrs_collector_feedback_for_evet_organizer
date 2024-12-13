@@ -1,6 +1,6 @@
 import 'package:customers_collector_feedback/core/services/injection_container.dart';
 import 'package:customers_collector_feedback/core/widgets/empty_state_list.dart';
-import 'package:customers_collector_feedback/core/widgets/loading_state_circular_progress.dart';
+import 'package:customers_collector_feedback/core/widgets/loading_state_shimmer_list.dart';
 import 'package:customers_collector_feedback/features/event_management/presentation/add_edit_event_page.dart';
 import 'package:customers_collector_feedback/features/event_management/presentation/cubit/event_cubit.dart';
 import 'package:customers_collector_feedback/features/event_management/presentation/cubit/event_state.dart';
@@ -29,37 +29,30 @@ class _ViewAllEventsPageState extends State<ViewAllEventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/Logo.png'),
-        ),
         title: const Text("Events"),
       ),
       body: BlocBuilder<EventCubit, EventState>(
         builder: (context, state) {
           if (state is EventLoading) {
-            debugPrint("Loadinggggggg");
-            return const LoadingStateCircularProgress();
+            return const LoadingStateShimmerList();
           } else if (state is EventLoaded) {
             if (state.events.isEmpty) {
               return const EmptyStateList(
-                  imageAssetName: 'assets/empty.png',
+                  imageAssetName: 'assets/images/empty.png',
                   title: 'Oops... There are no events found.',
                   description: "Tap '+' to add a new event.");
             }
-            return GridView.builder(
-              padding: const EdgeInsets.all(8.0),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // 2 items per row
-                childAspectRatio: 1, // Make the cards square
-                crossAxisSpacing: 8.0, // Space between columns
-                mainAxisSpacing: 8.0, // Space between rows
-              ),
+            return ListView.builder(
+
               itemCount: state.events.length,
               itemBuilder: (context, index) {
                 final currentEvent = state.events[index];
+
+
                 return Card(
-                  child: InkWell(
+                  child: ListTile(
+                    title: Text("Event ${currentEvent.description}"),
+                    subtitle: Text(currentEvent.title),
                     onTap: () async {
                       final result = await Navigator.push(
                         context,
@@ -79,28 +72,13 @@ class _ViewAllEventsPageState extends State<ViewAllEventsPage> {
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          currentEvent.title,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          currentEvent.location,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
                   ),
                 );
               },
             );
           } else if (state is EventError) {
-            debugPrint("Error: ${state.message} hehe");
             return ErrorStateList(
-              imageAssetName: 'assets/error.png',
+              imageAssetName: 'assets/images/error.png',
               errorMessage: state.message,
               onRetry: () {
                 context.read<EventCubit>().getAllEvents();
@@ -108,7 +86,7 @@ class _ViewAllEventsPageState extends State<ViewAllEventsPage> {
             );
           } else {
             return const EmptyStateList(
-                imageAssetName: 'assets/empty.png',
+                imageAssetName: 'assets/images/empty.png',
                 title: 'Oops... There are no events found.',
                 description: "Tap '+' to add a new event.");
           }

@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      body: LoadingStateShimmerList (),
+      ),
+    ));
+}
+
 class LoadingStateShimmerList extends StatelessWidget {
   const LoadingStateShimmerList({super.key});
 

@@ -51,7 +51,7 @@ class FeedbackFormCubit extends Cubit<FeedbackFormState> {
 
       result.fold(
         (failure) => emit(FeedbackFormError(failure.getMessage())),
-        (FeedbackForms) {
+        (_) {
           _feedbackFormsCache = feedbackForms;
           emit(FeedbackFormLoaded(feedbackForms: _feedbackFormsCache));
         },

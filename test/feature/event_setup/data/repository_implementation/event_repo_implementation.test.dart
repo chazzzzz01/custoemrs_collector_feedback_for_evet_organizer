@@ -22,7 +22,10 @@ void main() {
     id: '1',
     title: 'Test Event',
     date: DateTime(2024, 1, 1),
-    location: 'Test Location', description: 'office event', time: '10pm', guestIds: const [],
+    location: 'Test Location', 
+    description: 'office event', 
+    time: '10pm', 
+    guestIds: const [],
   );
 
    final testEventList = [testEvent];

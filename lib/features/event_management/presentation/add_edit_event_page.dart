@@ -9,6 +9,26 @@ import '../../feedback_management/domain/entities/feedback.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
+
+void main() {
+  runApp( MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Scaffold(
+      body:AddEditEventPage(
+        event: Event(
+    id: '1',
+    title: 'Test Event',
+    date: DateTime(2024, 1, 1),
+    location: 'Test Location', 
+    description: 'office event', 
+    time: '10pm', 
+    guestIds: const [],
+  
+       )),
+      ),
+    ));
+}
+
 class AddEditEventPage extends StatefulWidget {
   final Event? event;
 
